@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EmployeeLeaveManagementModelStoreContainer" CdmEntityContainer="EmployeeLeaveManagementEntities">
+    <FunctionImportMapping FunctionImportName="LeaveType_GetAll" FunctionName="EmployeeLeaveManagementModel.Store.LeaveType_GetAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmployeeLeaveManagementModel.LeaveType_GetAll_Result">
+          <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
+          <ScalarProperty Name="LeaveDescription" ColumnName="LeaveDescription" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Employee_InsertEmployee" FunctionName="EmployeeLeaveManagementModel.Store.Employee_InsertEmployee" />
+    <FunctionImportMapping FunctionImportName="Employee_GetEmployee" FunctionName="EmployeeLeaveManagementModel.Store.Employee_GetEmployee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmployeeLeaveManagementModel.Employee_GetEmployee_Result">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="StartDateEmployment" ColumnName="StartDateEmployment" />
+          <ScalarProperty Name="EndDateEmployment" ColumnName="EndDateEmployment" />
+          <ScalarProperty Name="PicturePath" ColumnName="PicturePath" />
+          <ScalarProperty Name="SignUpOn" ColumnName="SignUpOn" />
+          <ScalarProperty Name="LoggedOn" ColumnName="LoggedOn" />
+          <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+          <ScalarProperty Name="LevelDesciprtion" ColumnName="LevelDesciprtion" />
+          <ScalarProperty Name="AllotedVacation" ColumnName="AllotedVacation" />
+          <ScalarProperty Name="JobTitleId" ColumnName="JobTitleId" />
+          <ScalarProperty Name="TitleDecription" ColumnName="TitleDecription" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Employee_UpdateEmployee" FunctionName="EmployeeLeaveManagementModel.Store.Employee_UpdateEmployee" />
+    <FunctionImportMapping FunctionImportName="employeeLevel_GetAll" FunctionName="EmployeeLeaveManagementModel.Store.employeeLevel_GetAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmployeeLeaveManagementModel.employeeLevel_GetAll_Result">
+          <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+          <ScalarProperty Name="LevelDesciprtion" ColumnName="LevelDesciprtion" />
+          <ScalarProperty Name="AllotedVacation" ColumnName="AllotedVacation" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="JobTitle_GetAll" FunctionName="EmployeeLeaveManagementModel.Store.JobTitle_GetAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmployeeLeaveManagementModel.JobTitle_GetAll_Result">
+          <ScalarProperty Name="JobTitleId" ColumnName="JobTitleId" />
+          <ScalarProperty Name="TitleDecription" ColumnName="TitleDecription" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="LeaveLog_RequestLeave" FunctionName="EmployeeLeaveManagementModel.Store.LeaveLog_RequestLeave" />
+    <FunctionImportMapping FunctionImportName="LeaveLog_GetLeavePerEmployee" FunctionName="EmployeeLeaveManagementModel.Store.LeaveLog_GetLeavePerEmployee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmployeeLeaveManagementModel.LeaveLog_GetLeavePerEmployee_Result">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="EmmployeeName" ColumnName="EmmployeeName" />
+          <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
+          <ScalarProperty Name="LeaveDescription" ColumnName="LeaveDescription" />
+          <ScalarProperty Name="StartLeaveOn" ColumnName="StartLeaveOn" />
+          <ScalarProperty Name="EndLeaveOn" ColumnName="EndLeaveOn" />
+          <ScalarProperty Name="LeaveRequestedOn" ColumnName="LeaveRequestedOn" />
+          <ScalarProperty Name="LeaveApprovedOn" ColumnName="LeaveApprovedOn" />
+          <ScalarProperty Name="LeaveApprovedBy" ColumnName="LeaveApprovedBy" />
+          <ScalarProperty Name="LeaveApproved" ColumnName="LeaveApproved" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

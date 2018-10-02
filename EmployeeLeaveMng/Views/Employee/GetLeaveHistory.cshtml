@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Leave History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="text-center">Leave history</h4>
+
+
+@using (Ajax.BeginForm("GetLeaveHistory", "Employee",FormMethod.Post ,new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    OnSuccess = "GetData",
+    UpdateTargetId = "LeaveLog"
+
+}, new { @id ="ajaxForm", @class = "form-class" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4"> <input type="submit" value="All" class="btn btn-secondary btn-block" id="all"/> </div>
+            <div class="col-md-4"><input type="submit" value="Approved" class="btn btn-secondary btn-block" id="aprroved"/> </div>
+            <div class="col-md-4"> <input type="submit"  value="Disapproved"class="btn btn-secondary btn-block" id="rejected"/> </div>
+        </div>
+    </div>
+}
+
+<div id="LeaveLog">
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#all').click(function (event) {
+            var btnID = event.target.id;          
+            var userId = sessionStorage.getItem('UserID');
+            var link = '@Url.Action("GetLeaveHistory", "Employee", new { id = "-1", type = "-2" })';
+            link = link.replace('-1',  encodeURIComponent(userId));
+            link = link.replace('-2', encodeURIComponent(btnID));
+
+            console.log(link);
+            $('#ajaxForm').attr("action", link).submit()
+        });
+    });
+
+
+</script>

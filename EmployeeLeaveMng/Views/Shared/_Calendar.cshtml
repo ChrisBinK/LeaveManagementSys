@@ -1,0 +1,105 @@
+﻿
+@*This partial view rendar the calendar*@ 
+
+
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row CalendarHeader">
+            <div class="col-sm"><i class="fas fa-chevron-left leftChevron" id="previousMonthArrow"></i> </div>
+            <div class="col-sm"><h2 id="monthDescription"></h2></div>
+            <div class="col-sm"><i class="fas fa-chevron-right rightChevron" id="nextMonthArrow"></i></div>
+        </div>
+    </div>
+    <table class="table  table-bordered container-fluid" id="calendarTable">
+        <thead>
+            <tr class="calendarWeek">
+                <th> SUN</th>
+                <th> MON</th>
+                <th> TUE</th>
+                <th> WED</th>
+                <th> THU</th>
+                <th> FRI</th>
+                <th> SAT</th>
+            </tr>
+        </thead>
+        <tbody id="calendarContent"></tbody>
+    </table>
+
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="leaveRequestModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header customBgColor">
+                <h5 class="modal-title centerText w-100">Leave application</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
+
+                        <div class="form-group ">
+                            <label for="leaveType">Leave type</label>
+                            <select id="leaveType" class="form-control "></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fromDate">Start date</label>
+                            <input type="datetime-local" class="form-control" id="fromDate" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="toDate">End date </label>
+                            <input type="datetime-local" class="form-control" id="toDate" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" id="sendRequest">Send request</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/moment")
+@Scripts.Render("~/bundles/customScript")
+@section Sscripts {
+   
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        setUpcalendar();
+
+        $('#sendRequest').on('click', function ()
+        {
+            // construct a leaveRequest Object fro the modal values
+            var employeeLeaveRequest = {
+                EmployeeId: sessionStorage.getItem('UserID'),
+                LeaveTypeId: $('#leaveType').val(),
+                StartLeaveOn: $('#fromDate').val(),
+                EndLeaveOn: $('#toDate'). val()
+            }
+           
+             //send data to the server
+            $.ajax({
+                type: "POST",
+                data: JSON.stringify(employeeLeaveRequest),
+                url: "http://localhost:50322/api/LeaveLog/",
+                contentType: "application/json",
+                success: function(response) {
+                    $('#leaveRequestModal').modal('hide');
+                  }
+             
+            });
+        });
+    });
+</script>

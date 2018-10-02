@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EmployeeLeaveManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="Employee_GetEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Employee_InsertEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Employee_UpdateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeId" Type="nvarchar" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="MiddleName" Type="nvarchar" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="picturePath" Type="nvarchar" Mode="In" />
+          <Parameter Name="JobTitleId" Type="int" Mode="In" />
+          <Parameter Name="levelId" Type="int" Mode="In" />
+          <Parameter Name="startEmploymentOn" Type="datetime" Mode="In" />
+          <Parameter Name="EndDateEmployment" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="employeeLevel_GetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="JobTitle_GetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="LeaveLog_GetLeavePerEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employeeId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="LeaveLog_RequestLeave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employeeID" Type="nvarchar" Mode="In" />
+          <Parameter Name="leaveTypeID" Type="int" Mode="In" />
+          <Parameter Name="startLeaveOn" Type="datetime" Mode="In" />
+          <Parameter Name="endLeaveOn" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="LeaveType_GetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="EmployeeLeaveManagementModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmployeeLeaveManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EmployeeLeaveManagementEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="LeaveType_GetAll" ReturnType="Collection(EmployeeLeaveManagementModel.LeaveType_GetAll_Result)" />
+          <FunctionImport Name="Employee_InsertEmployee">
+          <Parameter Name="EmployeeId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Employee_GetEmployee" ReturnType="Collection(EmployeeLeaveManagementModel.Employee_GetEmployee_Result)">
+          <Parameter Name="EmployeeID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Employee_UpdateEmployee">
+            <Parameter Name="EmployeeId" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="MiddleName" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="picturePath" Mode="In" Type="String" />
+            <Parameter Name="JobTitleId" Mode="In" Type="Int32" />
+            <Parameter Name="levelId" Mode="In" Type="Int32" />
+            <Parameter Name="startEmploymentOn" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDateEmployment" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="employeeLevel_GetAll" ReturnType="Collection(EmployeeLeaveManagementModel.employeeLevel_GetAll_Result)" />
+          <FunctionImport Name="JobTitle_GetAll" ReturnType="Collection(EmployeeLeaveManagementModel.JobTitle_GetAll_Result)" />
+          <FunctionImport Name="LeaveLog_RequestLeave">
+            <Parameter Name="employeeID" Mode="In" Type="String" />
+            <Parameter Name="leaveTypeID" Mode="In" Type="Int32" />
+            <Parameter Name="startLeaveOn" Mode="In" Type="DateTime" />
+            <Parameter Name="endLeaveOn" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="LeaveLog_GetLeavePerEmployee" ReturnType="Collection(EmployeeLeaveManagementModel.LeaveLog_GetLeavePerEmployee_Result)">
+            <Parameter Name="employeeId" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="LeaveType_GetAll_Result">
+          <Property Type="Int32" Name="LeaveTypeID" Nullable="false" />
+          <Property Type="String" Name="LeaveDescription" Nullable="false" MaxLength="88" />
+        </ComplexType>
+        <ComplexType Name="Employee_GetEmployee_Result">
+          <Property Type="String" Name="EmployeeID" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="StartDateEmployment" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDateEmployment" Nullable="true" Precision="23" />
+          <Property Type="String" Name="PicturePath" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="SignUpOn" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LoggedOn" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="LevelID" Nullable="false" />
+          <Property Type="String" Name="LevelDesciprtion" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AllotedVacation" Nullable="true" />
+          <Property Type="Int32" Name="JobTitleId" Nullable="false" />
+          <Property Type="String" Name="TitleDecription" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="employeeLevel_GetAll_Result">
+          <Property Type="Int32" Name="LevelID" Nullable="false" />
+          <Property Type="String" Name="LevelDesciprtion" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AllotedVacation" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="JobTitle_GetAll_Result">
+          <Property Type="Int32" Name="JobTitleId" Nullable="false" />
+          <Property Type="String" Name="TitleDecription" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="LeaveLog_GetLeavePerEmployee_Result">
+          <Property Type="String" Name="EmployeeId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="EmmployeeName" Nullable="true" MaxLength="152" />
+          <Property Type="Int32" Name="LeaveTypeId" Nullable="false" />
+          <Property Type="String" Name="LeaveDescription" Nullable="false" MaxLength="88" />
+          <Property Type="DateTime" Name="StartLeaveOn" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndLeaveOn" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LeaveRequestedOn" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LeaveApprovedOn" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LeaveApprovedBy" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="LeaveApproved" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmployeeLeaveManagementModelStoreContainer" CdmEntityContainer="EmployeeLeaveManagementEntities" >
+          <FunctionImportMapping FunctionImportName="LeaveType_GetAll" FunctionName="EmployeeLeaveManagementModel.Store.LeaveType_GetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmployeeLeaveManagementModel.LeaveType_GetAll_Result">
+                <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
+                <ScalarProperty Name="LeaveDescription" ColumnName="LeaveDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Employee_InsertEmployee" FunctionName="EmployeeLeaveManagementModel.Store.Employee_InsertEmployee" />
+          <FunctionImportMapping FunctionImportName="Employee_GetEmployee" FunctionName="EmployeeLeaveManagementModel.Store.Employee_GetEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmployeeLeaveManagementModel.Employee_GetEmployee_Result">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="StartDateEmployment" ColumnName="StartDateEmployment" />
+                <ScalarProperty Name="EndDateEmployment" ColumnName="EndDateEmployment" />
+                <ScalarProperty Name="PicturePath" ColumnName="PicturePath" />
+                <ScalarProperty Name="SignUpOn" ColumnName="SignUpOn" />
+                <ScalarProperty Name="LoggedOn" ColumnName="LoggedOn" />
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="LevelDesciprtion" ColumnName="LevelDesciprtion" />
+                <ScalarProperty Name="AllotedVacation" ColumnName="AllotedVacation" />
+                <ScalarProperty Name="JobTitleId" ColumnName="JobTitleId" />
+                <ScalarProperty Name="TitleDecription" ColumnName="TitleDecription" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Employee_UpdateEmployee" FunctionName="EmployeeLeaveManagementModel.Store.Employee_UpdateEmployee" />
+          <FunctionImportMapping FunctionImportName="employeeLevel_GetAll" FunctionName="EmployeeLeaveManagementModel.Store.employeeLevel_GetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmployeeLeaveManagementModel.employeeLevel_GetAll_Result">
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="LevelDesciprtion" ColumnName="LevelDesciprtion" />
+                <ScalarProperty Name="AllotedVacation" ColumnName="AllotedVacation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="JobTitle_GetAll" FunctionName="EmployeeLeaveManagementModel.Store.JobTitle_GetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmployeeLeaveManagementModel.JobTitle_GetAll_Result">
+                <ScalarProperty Name="JobTitleId" ColumnName="JobTitleId" />
+                <ScalarProperty Name="TitleDecription" ColumnName="TitleDecription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LeaveLog_RequestLeave" FunctionName="EmployeeLeaveManagementModel.Store.LeaveLog_RequestLeave" />
+          <FunctionImportMapping FunctionImportName="LeaveLog_GetLeavePerEmployee" FunctionName="EmployeeLeaveManagementModel.Store.LeaveLog_GetLeavePerEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmployeeLeaveManagementModel.LeaveLog_GetLeavePerEmployee_Result">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmmployeeName" ColumnName="EmmployeeName" />
+                <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
+                <ScalarProperty Name="LeaveDescription" ColumnName="LeaveDescription" />
+                <ScalarProperty Name="StartLeaveOn" ColumnName="StartLeaveOn" />
+                <ScalarProperty Name="EndLeaveOn" ColumnName="EndLeaveOn" />
+                <ScalarProperty Name="LeaveRequestedOn" ColumnName="LeaveRequestedOn" />
+                <ScalarProperty Name="LeaveApprovedOn" ColumnName="LeaveApprovedOn" />
+                <ScalarProperty Name="LeaveApprovedBy" ColumnName="LeaveApprovedBy" />
+                <ScalarProperty Name="LeaveApproved" ColumnName="LeaveApproved" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

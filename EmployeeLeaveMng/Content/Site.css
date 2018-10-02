@@ -1,0 +1,65 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+
+body {
+    font-family: 'Playfair Display', serif;
+    margin-top: 70px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 0px;
+    padding-right: 55px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/************************************************************************************************/
+.CalendarHeader{
+    background-color:#FEEAE6;
+    text-align:center;
+    text-decoration-color:#442C2E;
+    padding:20px;
+    border-style :solid;
+    border-width:2px;
+    border-color:#D3D3D3;
+      
+}
+
+.calendarCell{
+    height: 70px;
+    text-align:center;
+}
+
+.calendarWeek{
+    background-color:#D3D3D3;
+}
+.calendarWeekend{
+    background-color:#A9A9A9;
+}
+
+.customBgColor{
+   
+     background-color:#FEEAE6;
+}
+
+.centerText{
+    text-align:center;
+    
+}
+.disabledWeekend{
+    cursor:initial;/*not-allowed;*/
+}
+

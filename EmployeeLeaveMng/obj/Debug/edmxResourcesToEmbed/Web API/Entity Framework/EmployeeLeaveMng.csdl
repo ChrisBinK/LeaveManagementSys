@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeLeaveManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="EmployeeLeaveManagementEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="LeaveType_GetAll" ReturnType="Collection(EmployeeLeaveManagementModel.LeaveType_GetAll_Result)" />
+    <FunctionImport Name="Employee_InsertEmployee">
+      <Parameter Name="EmployeeId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Employee_GetEmployee" ReturnType="Collection(EmployeeLeaveManagementModel.Employee_GetEmployee_Result)">
+      <Parameter Name="EmployeeID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Employee_UpdateEmployee">
+      <Parameter Name="EmployeeId" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="MiddleName" Mode="In" Type="String" />
+      <Parameter Name="address" Mode="In" Type="String" />
+      <Parameter Name="picturePath" Mode="In" Type="String" />
+      <Parameter Name="JobTitleId" Mode="In" Type="Int32" />
+      <Parameter Name="levelId" Mode="In" Type="Int32" />
+      <Parameter Name="startEmploymentOn" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDateEmployment" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="employeeLevel_GetAll" ReturnType="Collection(EmployeeLeaveManagementModel.employeeLevel_GetAll_Result)" />
+    <FunctionImport Name="JobTitle_GetAll" ReturnType="Collection(EmployeeLeaveManagementModel.JobTitle_GetAll_Result)" />
+    <FunctionImport Name="LeaveLog_RequestLeave">
+      <Parameter Name="employeeID" Mode="In" Type="String" />
+      <Parameter Name="leaveTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="startLeaveOn" Mode="In" Type="DateTime" />
+      <Parameter Name="endLeaveOn" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="LeaveLog_GetLeavePerEmployee" ReturnType="Collection(EmployeeLeaveManagementModel.LeaveLog_GetLeavePerEmployee_Result)">
+      <Parameter Name="employeeId" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="LeaveType_GetAll_Result">
+    <Property Type="Int32" Name="LeaveTypeID" Nullable="false" />
+    <Property Type="String" Name="LeaveDescription" Nullable="false" MaxLength="88" />
+  </ComplexType>
+  <ComplexType Name="Employee_GetEmployee_Result">
+    <Property Type="String" Name="EmployeeID" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="StartDateEmployment" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="EndDateEmployment" Nullable="true" Precision="23" />
+    <Property Type="String" Name="PicturePath" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="SignUpOn" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="LoggedOn" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="LevelID" Nullable="false" />
+    <Property Type="String" Name="LevelDesciprtion" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="AllotedVacation" Nullable="true" />
+    <Property Type="Int32" Name="JobTitleId" Nullable="false" />
+    <Property Type="String" Name="TitleDecription" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="employeeLevel_GetAll_Result">
+    <Property Type="Int32" Name="LevelID" Nullable="false" />
+    <Property Type="String" Name="LevelDesciprtion" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="AllotedVacation" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="JobTitle_GetAll_Result">
+    <Property Type="Int32" Name="JobTitleId" Nullable="false" />
+    <Property Type="String" Name="TitleDecription" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="LeaveLog_GetLeavePerEmployee_Result">
+    <Property Type="String" Name="EmployeeId" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="EmmployeeName" Nullable="true" MaxLength="152" />
+    <Property Type="Int32" Name="LeaveTypeId" Nullable="false" />
+    <Property Type="String" Name="LeaveDescription" Nullable="false" MaxLength="88" />
+    <Property Type="DateTime" Name="StartLeaveOn" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="EndLeaveOn" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="LeaveRequestedOn" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="LeaveApprovedOn" Nullable="true" Precision="23" />
+    <Property Type="String" Name="LeaveApprovedBy" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="LeaveApproved" Nullable="true" />
+  </ComplexType>
+</Schema>

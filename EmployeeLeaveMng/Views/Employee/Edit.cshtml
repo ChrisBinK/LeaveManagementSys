@@ -1,0 +1,130 @@
+﻿@model EmployeeLeaveMng.Web_API.Entity_Framework.Employee_GetEmployee_Result
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3"> </div>
+    <div class="col-md-6 border-white rounded shadow">
+    <h4 class="text-center">Update your profile</h4>
+    <hr />
+    @using (Html.BeginForm("Edit","Employee", FormMethod.Post,new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group ml-5">
+            @Html.LabelFor(model => model.FirstName, "First name", htmlAttributes: new { @class = "control-label col-md-6" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+            <div class="form-group ml-5">
+                @Html.LabelFor(model => model.LastName, "Last name",  htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group ml-5">
+                @Html.LabelFor(model => model.MiddleName, "Middle name",  htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group ml-5">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">                
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group ml-5">
+                @Html.Label("Upload picture", htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-10">
+                    <input type="file" id="userImage" name="userImg" class="form-control-file" accept=".png, .jpeg, .jpg" />
+
+                </div>
+            </div>
+
+            <div class="form-group ml-5">
+                @Html.HiddenFor(model => model.LevelID)
+                @Html.Label("Level", htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-10">
+                   <select class="form-control" id="employeeLevel"></select>
+                </div>
+            </div>
+
+            <div class="form-group ml-5">
+                @Html.Label("Job title", htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.JobTitleId)
+                    <select class="form-control" id="employeeJobTitle"></select>
+                </div>
+            </div>
+            <div class="form-group ml-5">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn  btn-block btn-default" />
+                </div>
+            </div>
+            <div class="text-center mb-md-3">
+                @Html.ActionLink("Back to Calendar", "Index")
+            </div>
+        }
+        </div>
+        <div class="col-md-3"> </div>             
+    </div>
+
+@Scripts.Render("~/bundles/jquery")
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        
+        //ajax call to populate the the dropdown box for levels
+        $.get('http://localhost:50322/api/' + 'EmployeeLevel/', function (data) {
+            var selectHtml = '';
+            
+            $.each(data, function (i, item) {
+                //create option for the select input with the data retrieve from the database
+                selectHtml += '<option value="' + item.LevelID + '">' + item.LevelDesciprtion + '</option>';
+            });
+            //append the html  to the slect element
+            $('#employeeLevel').append(selectHtml);
+        });
+
+        //ajax call to populate the the dropdown box for levels
+        $.get('http://localhost:50322/api/' + 'JobTitle/', function (data) {
+            var selectHtml = '';
+           
+            $.each(data, function (i, item) {
+                //create option for the select input with the data retrieve from the database
+                selectHtml += '<option value="' + item.JobTitleId + '">' + item.TitleDecription + '</option>';
+            });
+            //append the html  to the slect element
+            $('#employeeJobTitle').append(selectHtml);
+        });
+
+        //when the dropdown value change , set the hidden field to the new changed value for fiel Level 
+        $('#employeeLevel').on("change", function () {
+            $('#LevelID').val($(this).text())
+        });
+
+        $('#employeeJobTitle').on("change", function () {
+            $('#JobTitleId').val($(this).text())
+        });
+    });
+   
+</script>
+
