@@ -71,53 +71,68 @@ namespace EmployeeLeaveMng.Controllers
            
         }
 
-        // GET: Employee/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: Employee/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-
+        /*
+         * Mehtod to display a leave report Per Employee
+         * */
         public ActionResult GetLeaveHistory(string id)
         {
-            
-            return View();
+            var requestLeaves = dbContext.LeaveLog_GetLeavePerEmployee(id).ToList();
+            return View(requestLeaves);
         }
 
         [HttpPost]
         public ActionResult GetLeaveHistory(string id, string  type )
         {
-             List<LeaveLog_GetLeavePerEmployee_Result> result = null;
+            List<LeaveLog_GetLeavePerEmployee_Result> result = null;
             var requestLeaves = dbContext.LeaveLog_GetLeavePerEmployee(id);
-            if (type == "all")
+            //when the button selected is  all return all leave request the user has ever made
+            switch (type)
             {
-                var allRequstLeaves =  from e in requestLeaves
-                                       select e
+                case "all":
+                    // retrieve all the  reuest leave that an employee has ever made
+                    result = (from employee in requestLeaves
+                              orderby employee.LeaveRequestedOn
+                              select employee).ToList();
+                    break;
+                case "approved":
+                    // retrieve only approved request leave  for an employee
+                    result = (from employee in requestLeaves
+                              where employee.LeaveApproved == true
+                              orderby employee.LeaveRequestedOn
+                              select employee).ToList();
+                    break;
+                case "rejected":
+                    // retrieve all rejected request leave of the employee
+                    result = (from employee in requestLeaves
+                                              where employee.LeaveApproved == false
+                                              select employee).ToList();
+                    break;
+
+                default:
+                    //retrieve all request leave of the employee that the admistrator has not attended
+                    result = (from employee in requestLeaves
+                                              where employee.LeaveApproved == null
+                                              select employee).ToList();
+                    break;
+
             }
 
-            if (type == "approved")
-            {
-
-            }
-            return View();
+            return View(result);
         }
-        
+      
+       public ActionResult LeaveSummary(string id)
+       {
+            // get the allocated  vacation of an employee
+            var employee = dbContext.Employee_GetEmployee(id).FirstOrDefault();
+            ViewBag.AllotedVacation = employee.AllotedVacation;
+
+            // get the report 
+            var summary = dbContext.LeaveLog_GetLeaveSummaryPerEmployee(id).ToList();
+
+            return View(summary);
+       }
+
         //*********************************************************************************
         //utility method to save a picture in the folder Image and return the image path
         [NonAction]

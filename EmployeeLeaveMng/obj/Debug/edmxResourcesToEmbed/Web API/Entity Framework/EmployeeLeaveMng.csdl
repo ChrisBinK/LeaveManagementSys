@@ -31,6 +31,9 @@
     <FunctionImport Name="LeaveLog_GetLeavePerEmployee" ReturnType="Collection(EmployeeLeaveManagementModel.LeaveLog_GetLeavePerEmployee_Result)">
       <Parameter Name="employeeId" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="LeaveLog_GetLeaveSummaryPerEmployee" ReturnType="Collection(EmployeeLeaveManagementModel.LeaveLog_GetLeaveSummaryPerEmployee_Result)">
+      <Parameter Name="employeeId" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="LeaveType_GetAll_Result">
     <Property Type="Int32" Name="LeaveTypeID" Nullable="false" />
@@ -73,5 +76,13 @@
     <Property Type="DateTime" Name="LeaveApprovedOn" Nullable="true" Precision="23" />
     <Property Type="String" Name="LeaveApprovedBy" Nullable="true" MaxLength="50" />
     <Property Type="Boolean" Name="LeaveApproved" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="LeaveLog_GetLeaveSummaryPerEmployee_Result">
+    <Property Type="String" Name="LeaveDescription" Nullable="false" MaxLength="88" />
+    <Property Type="Int32" Name="TotalLeaveType" Nullable="true" />
+    <Property Type="Int32" Name="Approved" Nullable="true" />
+    <Property Type="Int32" Name="Disaproved" Nullable="true" />
+    <Property Type="Int32" Name="NotAttended" Nullable="true" />
+    <Property Type="Int32" Name="TotalNumdays" Nullable="true" />
   </ComplexType>
 </Schema>

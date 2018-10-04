@@ -66,5 +66,17 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="LeaveLog_GetLeaveSummaryPerEmployee" FunctionName="EmployeeLeaveManagementModel.Store.LeaveLog_GetLeaveSummaryPerEmployee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EmployeeLeaveManagementModel.LeaveLog_GetLeaveSummaryPerEmployee_Result">
+          <ScalarProperty Name="LeaveDescription" ColumnName="LeaveDescription" />
+          <ScalarProperty Name="TotalLeaveType" ColumnName="TotalLeaveType" />
+          <ScalarProperty Name="Approved" ColumnName="Approved" />
+          <ScalarProperty Name="Disaproved" ColumnName="Disaproved" />
+          <ScalarProperty Name="NotAttended" ColumnName="NotAttended" />
+          <ScalarProperty Name="TotalNumdays" ColumnName="TotalNumdays" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

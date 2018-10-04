@@ -2,48 +2,59 @@
 
 @if (Request.IsAuthenticated)
 {
-    <div class="card" style="width:14rem;">
-       
-        <img class="card-img-top img-thumbnail" src="" alt="Card image cap " id="userImage">
-        <div class="card-body">               
+    <div>
+        <div class="card" style="width:14rem;">
+
+            <img class="card-img-top img-thumbnail rounded" src="" alt="Card image cap" id="userImage" style="max-height:200px">
+            <div class="card-body">
                 <h5 class="card-title" id="userName">  </h5>
-                <p class="card-text" id="userPosition"></p>        
+                <p class="card-text" id="userPosition"></p>
+            </div>
+
+            <ul class="nav flex-column list-group">
+
+                @if (HttpContext.Current.User.IsInRole("Employee"))
+                {
+                    <li class="nav-item list-group-item">
+                        <a class="nav-link active" href="@Url.Action("Index", "Employee")"> <i class="fas fa-calendar-alt mr-1"></i>Schedule</a>
+                    </li>
+                    <li class="nav-item list-group-item">
+                        <a class="nav-link" href="@Url.Action("GetLeaveHistory", "Employee", new { id = User.Identity.GetUserId(), type="all" })"> <i class="fas fa-list-ul mr-1"></i>Leave Report</a>
+                    </li>
+                    <li class="nav-item list-group-item">
+                        <a class="nav-link" href="@Url.Action("LeaveSummary", "Employee", new { id = User.Identity.GetUserId() })"> <i class="fas fa-list-ul mr-1"></i>Leave summary</a>
+                    </li>
+                    <li class="nav-item list-group-item">
+                        <a class="nav-link " href="@Url.Action("Edit", "Employee", new { id = User.Identity.GetUserId() })"> <i class="fas fa-user mr-1"></i>Profile</a>
+                    </li>
+                }
+
+                @if (HttpContext.Current.User.IsInRole("Admin"))
+                {
+                }
+            </ul>
         </div>
-        
-        <ul class="nav flex-column">
-
-            @if ( HttpContext.Current.User.IsInRole("Employee"))
-            {
-                <li class="nav-item">                   
-                    <a class="nav-link active" href="@Url.Action("Index", "Employee")">Calendar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("GetLeaveHistory", "Employee", new { id = User.Identity.GetUserId() })">Leave Report</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"href="@Url.Action("Index", "Employee")">Leave summary</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="@Url.Action("Edit", "Employee", new { id = User.Identity.GetUserId() })">Profile</a>
-                </li>
-            }
-
-            @if (HttpContext.Current.User.IsInRole("Admin"))
-            {
-            }
-        </ul>
     </div>
 }
 
 @Scripts.Render("~/bundles/jquery")
 <script type="text/javascript">
-    $(document).ready(function () {
+
+    function setUpUserData()
+    {
         //// get the userName , userImagePath and userPosition  stored in sessionStorage      
         var imageFileName = sessionStorage.getItem('imagePath') + "";
         $('#userName').text(sessionStorage.getItem('userName'));
         $('#userImage').attr('src', imageFileName);
         $('#userPosition').text(sessionStorage.getItem('position'));
-       
+
+    }
+
+    $(document).ready(function () {
+        
+        setUpUserData();
+
+  
     });
 </script>
 

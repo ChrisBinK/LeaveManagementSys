@@ -28,6 +28,9 @@
         <Function Name="LeaveLog_GetLeavePerEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="employeeId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="LeaveLog_GetLeaveSummaryPerEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employeeId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="LeaveLog_RequestLeave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="employeeID" Type="nvarchar" Mode="In" />
           <Parameter Name="leaveTypeID" Type="int" Mode="In" />
@@ -69,6 +72,9 @@
             <Parameter Name="endLeaveOn" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="LeaveLog_GetLeavePerEmployee" ReturnType="Collection(EmployeeLeaveManagementModel.LeaveLog_GetLeavePerEmployee_Result)">
+          <Parameter Name="employeeId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LeaveLog_GetLeaveSummaryPerEmployee" ReturnType="Collection(EmployeeLeaveManagementModel.LeaveLog_GetLeaveSummaryPerEmployee_Result)">
             <Parameter Name="employeeId" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
@@ -113,6 +119,14 @@
           <Property Type="DateTime" Name="LeaveApprovedOn" Nullable="true" Precision="23" />
           <Property Type="String" Name="LeaveApprovedBy" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="LeaveApproved" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="LeaveLog_GetLeaveSummaryPerEmployee_Result">
+          <Property Type="String" Name="LeaveDescription" Nullable="false" MaxLength="88" />
+          <Property Type="Int32" Name="TotalLeaveType" Nullable="true" />
+          <Property Type="Int32" Name="Approved" Nullable="true" />
+          <Property Type="Int32" Name="Disaproved" Nullable="true" />
+          <Property Type="Int32" Name="NotAttended" Nullable="true" />
+          <Property Type="Int32" Name="TotalNumdays" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -182,6 +196,18 @@
                 <ScalarProperty Name="LeaveApprovedOn" ColumnName="LeaveApprovedOn" />
                 <ScalarProperty Name="LeaveApprovedBy" ColumnName="LeaveApprovedBy" />
                 <ScalarProperty Name="LeaveApproved" ColumnName="LeaveApproved" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LeaveLog_GetLeaveSummaryPerEmployee" FunctionName="EmployeeLeaveManagementModel.Store.LeaveLog_GetLeaveSummaryPerEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmployeeLeaveManagementModel.LeaveLog_GetLeaveSummaryPerEmployee_Result">
+                <ScalarProperty Name="LeaveDescription" ColumnName="LeaveDescription" />
+                <ScalarProperty Name="TotalLeaveType" ColumnName="TotalLeaveType" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Disaproved" ColumnName="Disaproved" />
+                <ScalarProperty Name="NotAttended" ColumnName="NotAttended" />
+                <ScalarProperty Name="TotalNumdays" ColumnName="TotalNumdays" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

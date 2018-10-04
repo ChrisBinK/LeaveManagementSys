@@ -240,6 +240,9 @@
     <Compile Include="Web API\Entity Framework\LeaveLog_GetLeavePerEmployee_Result.cs">
       <DependentUpon>EmployeeLeaveMng.tt</DependentUpon>
     </Compile>
+    <Compile Include="Web API\Entity Framework\LeaveLog_GetLeaveSummaryPerEmployee_Result.cs">
+      <DependentUpon>EmployeeLeaveMng.tt</DependentUpon>
+    </Compile>
     <Compile Include="Web API\Entity Framework\LeaveType_GetAll_Result.cs">
       <DependentUpon>EmployeeLeaveMng.tt</DependentUpon>
     </Compile>
@@ -474,6 +477,7 @@
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Employee\GetLeaveHistory.cshtml" />
+    <Content Include="Views\Employee\LeaveSummary.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

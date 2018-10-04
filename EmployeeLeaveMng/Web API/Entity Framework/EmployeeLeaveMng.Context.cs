@@ -135,5 +135,14 @@ namespace EmployeeLeaveMng.Web_API.Entity_Framework
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LeaveLog_GetLeavePerEmployee_Result>("LeaveLog_GetLeavePerEmployee", employeeIdParameter);
         }
+    
+        public virtual ObjectResult<LeaveLog_GetLeaveSummaryPerEmployee_Result> LeaveLog_GetLeaveSummaryPerEmployee(string employeeId)
+        {
+            var employeeIdParameter = employeeId != null ?
+                new ObjectParameter("employeeId", employeeId) :
+                new ObjectParameter("employeeId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LeaveLog_GetLeaveSummaryPerEmployee_Result>("LeaveLog_GetLeaveSummaryPerEmployee", employeeIdParameter);
+        }
     }
 }

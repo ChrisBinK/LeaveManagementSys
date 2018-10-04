@@ -1,0 +1,63 @@
+﻿@model IEnumerable<EmployeeLeaveMng.Web_API.Entity_Framework.LeaveLog_GetLeaveSummaryPerEmployee_Result>
+
+@{
+    ViewBag.Title = "LeaveSummary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card">
+    <div class="card-header customBgColor">
+        <h4 class="text-center">Summary</h4>
+    </div>
+    <div class="card-body">
+    @if (Model != null)
+    {
+        <table class="table table-borderless">
+            <thead class="calendarWeek">
+                <tr>
+                    <th scope="col">Leave type</th>
+                    <th scope="col"> # Total Days</th>
+                    <th scope="col"> # count </th>
+                    
+                    <th scope="col"> # Approvedd</th>
+                    <th scope="col"> # Disapproved</th>
+                    <th scope="col"> # Not attended</th>
+                </tr>
+            </thead>
+            <tbody>
+
+               @{
+                  
+                   foreach (var item in Model)
+                   {
+                        <tr>
+                            <th scope="row">@item.LeaveDescription</th>
+                            <td>@item.TotalNumdays</td>
+                            <td>@item.TotalLeaveType</td>
+                            <td>@item.Approved</td>
+                            <td>@item.Disaproved</td>
+                            <td>@item.NotAttended </td>
+                        </tr>
+                   }
+
+                <tr class="customBgColor">
+                    <td scope="row" colspan="3"><h6 class="font-weight-bold"> Alloted  vacation time </h6></td>
+                    <td colspan="3"> <h6 class="font-weight-bold">@ViewBag.AllotedVacation</h6></td>
+                </tr>
+                <tr class="calendarWeek">
+                    <td scope="row" colspan="3"><h6 class="font-weight-bold"> Used  vacation time</h6></td>
+                    <td colspan="3"><h6 class="font-weight-bold">@Model.Sum(x => x.TotalNumdays)</h6></td>
+                </tr>
+                <tr class="customBgColor">
+                    <td scope="row" colspan="3"><h6 class="font-weight-bold"> Available  vacation time</h6></td>
+                    <td colspan="3"><h6 class="font-weight-bold"> @(ViewBag.AllotedVacation - @Model.Sum(x => x.TotalNumdays)) </h6></td>
+                </tr>
+                    }
+            </tbody>
+        </table>
+    }
+
+    </div>
+</div>

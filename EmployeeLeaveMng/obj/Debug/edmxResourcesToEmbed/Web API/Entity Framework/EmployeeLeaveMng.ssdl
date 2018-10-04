@@ -23,6 +23,9 @@
   <Function Name="LeaveLog_GetLeavePerEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="employeeId" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="LeaveLog_GetLeaveSummaryPerEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employeeId" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="LeaveLog_RequestLeave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="employeeID" Type="nvarchar" Mode="In" />
     <Parameter Name="leaveTypeID" Type="int" Mode="In" />
