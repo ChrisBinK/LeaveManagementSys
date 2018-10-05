@@ -75,7 +75,7 @@
           <Parameter Name="employeeId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="LeaveLog_GetLeaveSummaryPerEmployee" ReturnType="Collection(EmployeeLeaveManagementModel.LeaveLog_GetLeaveSummaryPerEmployee_Result)">
-            <Parameter Name="employeeId" Mode="In" Type="String" />
+          <Parameter Name="employeeId" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="LeaveType_GetAll_Result">

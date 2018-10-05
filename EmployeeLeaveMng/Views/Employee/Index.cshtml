@@ -18,5 +18,11 @@
         sessionStorage.setItem('userName', '@ViewBag.Name');
         sessionStorage.setItem('imagePath', '@ViewBag.ImagePath');
         sessionStorage.setItem('position', '@ViewBag.Position');
+
+
+        var imageFileName = sessionStorage.getItem('imagePath') + "";
+        $('#userName').text(sessionStorage.getItem('userName'));
+        $('#userImage').attr('src', imageFileName);
+        $('#userPosition').text(sessionStorage.getItem('position'));
     });
 </script>

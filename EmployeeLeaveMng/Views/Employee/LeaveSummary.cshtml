@@ -18,12 +18,12 @@
             <thead class="calendarWeek">
                 <tr>
                     <th scope="col">Leave type</th>
+                    <th scope="col"> # Request</th>
+                  
+                    <th scope="col"> # Days Approvedd</th>
+                    <th scope="col"> # Days Disapproved</th>
+                    <th scope="col"> # Days Not attended</th>
                     <th scope="col"> # Total Days</th>
-                    <th scope="col"> # count </th>
-                    
-                    <th scope="col"> # Approvedd</th>
-                    <th scope="col"> # Disapproved</th>
-                    <th scope="col"> # Not attended</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,12 +33,12 @@
                    foreach (var item in Model)
                    {
                         <tr>
-                            <th scope="row">@item.LeaveDescription</th>
-                            <td>@item.TotalNumdays</td>
+                            <th scope="row">@item.LeaveDescription</th>               
                             <td>@item.TotalLeaveType</td>
                             <td>@item.Approved</td>
                             <td>@item.Disaproved</td>
                             <td>@item.NotAttended </td>
+                            <td>@item.TotalNumdays</td>
                         </tr>
                    }
 
@@ -48,11 +48,11 @@
                 </tr>
                 <tr class="calendarWeek">
                     <td scope="row" colspan="3"><h6 class="font-weight-bold"> Used  vacation time</h6></td>
-                    <td colspan="3"><h6 class="font-weight-bold">@Model.Sum(x => x.TotalNumdays)</h6></td>
+                    <td colspan="3"><h6 class="font-weight-bold">@Model.Sum(x => x.Approved)</h6></td>
                 </tr>
                 <tr class="customBgColor">
                     <td scope="row" colspan="3"><h6 class="font-weight-bold"> Available  vacation time</h6></td>
-                    <td colspan="3"><h6 class="font-weight-bold"> @(ViewBag.AllotedVacation - @Model.Sum(x => x.TotalNumdays)) </h6></td>
+                    <td colspan="3"><h6 class="font-weight-bold"> @(ViewBag.AllotedVacation - @Model.Sum(x => x.Approved)) </h6></td>
                 </tr>
                     }
             </tbody>
