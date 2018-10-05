@@ -1,7 +1,9 @@
 # LeaveManagementSys
 Leave management system  allow the process of managing employee time-off request efficiently.Employees can request and submit their leaves online  and the administrator will view all the request to approve or reject their leaves.<br/>
 
-[[https://github.com/ChrisBinK/LeaveManagementSys/EmployeeLeaveMng/2018-10-05_2138_LMS.png]]
+<div> 
+ <img src="EmployeeLeaveMng/2018-10-05_2138_LMS.png"/>
+</div>
 
 An employee can :
 <ul>
