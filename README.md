@@ -16,3 +16,11 @@ An administrator can:
 <ul>
   <li> Approve or reject request from employees</li>
  </ul>
+ Tech stack used: 
+ <ul>
+ <li>Programming Language: C# </li>
+  <li>  Asp.net MVC, Entity Framework, JQuery </li>
+  <li> Bootstrap 4 </li>
+  <li>  DBMS:  Ms SQL Server</li>
+ 
+</ul>
